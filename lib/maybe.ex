@@ -1,10 +1,11 @@
 defmodule Moonsugar.Maybe do
   @moduledoc """
-  Documentation for Moonsugar.Maybe.
+  The Maybe module contains functions that help create and interact with the maybe type.
+  The Maybe type used in this library is represented as either a Just type or a Nothing type.
   """
 
   @doc """
-  Helper function to create a 'just' structure
+  Helper function to create a just type
 
   ## Examples
 
@@ -17,7 +18,7 @@ defmodule Moonsugar.Maybe do
   end
 
   @doc """
-  Helper function to create a 'nothing' structure
+  Helper function to create a nothing type
 
   ## Examples
 
@@ -30,7 +31,7 @@ defmodule Moonsugar.Maybe do
   end
 
   @doc """
-  Extracts a value from a 'just' structure
+  Extracts a value from a maybe type
   If the provided argument doesn't have a value, the default is returned
 
   ## Examples
@@ -50,7 +51,7 @@ defmodule Moonsugar.Maybe do
   end
 
   @doc """
-  maps over 'just' or 'nothing' structures
+  maps over a maybe type
 
   ## Examples
 
@@ -69,7 +70,7 @@ defmodule Moonsugar.Maybe do
   end
 
   @doc """
-  Like map, but chain takes a function that returns a 'maybe' type
+  Like map, but chain takes a function that returns a maybe type
   This prevents nested maybes
 
   ## Examples
