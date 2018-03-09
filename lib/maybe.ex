@@ -66,7 +66,6 @@ defmodule Moonsugar.Maybe do
       {:just, val} -> just(fun.(val))
       _ -> :nothing
     end
-
   end
 
   @doc """
@@ -101,11 +100,10 @@ defmodule Moonsugar.Maybe do
   """
   def chain(maybe, fun) do
     with {:just, val} <- maybe,
-         {:just, innerVal} <- fun.(val)
-      do
+         {:just, innerVal} <- fun.(val) do
       {:just, innerVal}
-      else
-        _ -> :nothing
+    else
+      _ -> :nothing
     end
   end
 
