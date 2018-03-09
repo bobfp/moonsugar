@@ -114,8 +114,7 @@ defmodule Moonsugar.Result do
     end
   end
 
-
-  #TODO implement this probably
+  # TODO implement this probably
   # def or_else(result, fun) do
   #   case result do
   #     {:just, _} -> true
@@ -215,5 +214,4 @@ defmodule Moonsugar.Result do
       end
     end
   end
-
 end
