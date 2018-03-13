@@ -196,7 +196,7 @@ defmodule Moonsugar.Result do
   end
 
   @doc """
-  converts a variable from a validation type to a result type
+  Attempts to do something that might throw an error, and converts the out put to a result type
 
   ## Examples
   iex> Result.attempt("Shoot Elf")
