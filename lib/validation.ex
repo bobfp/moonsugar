@@ -1,4 +1,4 @@
- defmodule Moonsugar.Validation do
+defmodule Moonsugar.Validation do
   @moduledoc """
   The Validation module contains functions that help create and interact with the validation type.
   """
@@ -47,6 +47,7 @@
   def concat({:success, _}, {:failure, reasonB}), do: {:failure, reasonB}
   def concat({:failure, reasonA}, {:success, _}), do: {:failure, reasonA}
   def concat({:success, _}, {:success, valB}), do: {:success, valB}
+
   def concat({:failure, reasonA}, {:failure, reasonB}) do
     {:failure, Enum.concat(reasonA, reasonB)}
   end
@@ -95,11 +96,10 @@
   """
   def mapFailure(validation, fun) do
     case validation do
-      {:failure, reasons} -> failure(Enum.map(reasons, &(fun.(&1))))
+      {:failure, reasons} -> failure(Enum.map(reasons, &fun.(&1)))
       success -> success
     end
   end
-
 
   @doc """
   converts a variable that might be nil to a validation type
@@ -151,6 +151,4 @@
       {:error, error} -> {:failure, [error]}
     end
   end
-
-
 end
