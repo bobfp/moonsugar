@@ -1,10 +1,10 @@
 defmodule Moonsugar.Result do
   @moduledoc """
-  The Result module contains functions that help create and interact with the result type.
+  The Result module contains functions that help create and interact with the result type. The result type is represented as either `{:ok, value}` or `{:error, reason}`.
   """
 
   @doc """
-  Helper function to create an ok type
+  Helper function to create an ok tuple.
 
   ## Examples
 
@@ -17,7 +17,7 @@ defmodule Moonsugar.Result do
   end
 
   @doc """
-  Helper function to create a error type
+  Helper function to create a error tuple.
 
   ## Examples
 
@@ -30,19 +30,19 @@ defmodule Moonsugar.Result do
   end
 
   @doc """
-  Extracts a value from a result type
-  If the provided argument doesn't have a value, the default is returned
+  Extracts a value from a result type.
+  If the provided argument doesn't have a value, the default is returned.
 
   ## Examples
 
-      iex> Result.getWithDefault({:ok, 3}, 0)
+      iex> Result.get_with_default({:ok, 3}, 0)
       3
 
-      iex> Result.getWithDefault({:error, "Game Crashed"}, 0)
+      iex> Result.get_with_default({:error, "Game Crashed"}, 0)
       0
 
   """
-  def getWithDefault(result, default) do
+  def get_with_default(result, default) do
     case result do
       {:ok, val} -> val
       _ -> default
@@ -50,7 +50,7 @@ defmodule Moonsugar.Result do
   end
 
   @doc """
-  maps over a result type
+  Maps over a result type.
 
   ## Examples
 
@@ -68,8 +68,8 @@ defmodule Moonsugar.Result do
   end
 
   @doc """
-  Like map, but chain takes a function that returns a result type
-  This prevents nested results
+  Like map, but chain takes a function that returns a result type.
+  This prevents nested results.
 
   ## Examples
 
@@ -124,7 +124,7 @@ defmodule Moonsugar.Result do
   # end
 
   @doc """
-  determines if a value is a result type
+  Determines if a value is a result type.
 
       ## Examples
 
@@ -146,7 +146,7 @@ defmodule Moonsugar.Result do
   end
 
   @doc """
-  converts a variable that might be nil to a result type
+  Converts a variable that might be nil to a result type.
 
   ## Examples
 
@@ -164,7 +164,7 @@ defmodule Moonsugar.Result do
   end
 
   @doc """
-  converts a variable from a maybe type to a result type
+  Converts a variable from a maybe type to a result type.
 
   ## Examples
 
@@ -182,7 +182,7 @@ defmodule Moonsugar.Result do
   end
 
   @doc """
-  converts a variable from a validation type to a result type
+  Converts a variable from a validation type to a result type.
 
   ## Examples
 
@@ -200,7 +200,7 @@ defmodule Moonsugar.Result do
   end
 
   @doc """
-  Attempts to do something that might throw an error, and converts the out put to a result type
+  Attempts to do something that might throw an error, and converts the output to a result type.
 
   ## Examples
 

@@ -1,10 +1,11 @@
 defmodule Moonsugar.Validation do
   @moduledoc """
   The Validation module contains functions that help create and interact with the validation type.
+  The Validation type is represented as either `{:success, value}` or `{:failure, reasons}`
   """
 
   @doc """
-  Helper function to create a success type
+  Helper function to create a success tuple.
 
   ## Examples
 
@@ -17,7 +18,7 @@ defmodule Moonsugar.Validation do
   end
 
   @doc """
-  Helper function to create a failure type
+  Helper function to create a failure tuple.
 
   ## Examples
 
@@ -25,8 +26,8 @@ defmodule Moonsugar.Validation do
       {:failure, ["Goat is floating"]}
 
   """
-  def failure(reason) do
-    {:failure, reason}
+  def failure(reasons) do
+    {:failure, reasons}
   end
 
   @doc """
@@ -44,12 +45,12 @@ defmodule Moonsugar.Validation do
       {:success, 3}
 
   """
-  def concat({:success, _}, {:failure, reasonB}), do: {:failure, reasonB}
-  def concat({:failure, reasonA}, {:success, _}), do: {:failure, reasonA}
+  def concat({:success, _}, {:failure, reasonsB}), do: {:failure, reasonsB}
+  def concat({:failure, reasonsA}, {:success, _}), do: {:failure, reasonsA}
   def concat({:success, _}, {:success, valB}), do: {:success, valB}
 
-  def concat({:failure, reasonA}, {:failure, reasonB}) do
-    {:failure, Enum.concat(reasonA, reasonB)}
+  def concat({:failure, reasonsA}, {:failure, reasonsB}) do
+    {:failure, Enum.concat(reasonsA, reasonsB)}
   end
 
   @doc """
@@ -66,7 +67,7 @@ defmodule Moonsugar.Validation do
   end
 
   @doc """
-  maps over a validation type, only applies the function to success types
+  Maps over a validation type, only applies the function to success tuples.
 
   ## Examples
 
@@ -84,7 +85,7 @@ defmodule Moonsugar.Validation do
   end
 
   @doc """
-  maps over a validation type, only applies the function to failure types
+  Maps over a validation type, only applies the function to failure tuples.
 
   ## Examples
 
@@ -96,13 +97,13 @@ defmodule Moonsugar.Validation do
   """
   def mapFailure(validation, fun) do
     case validation do
-      {:failure, reasons} -> failure(Enum.map(reasons, &fun.(&1)))
+      {:failure, reasonss} -> failure(Enum.map(reasonss, &fun.(&1)))
       success -> success
     end
   end
 
   @doc """
-  converts a variable that might be nil to a validation type
+  Converts a variable that might be nil to a validation type.
 
   ## Examples
 
@@ -120,7 +121,7 @@ defmodule Moonsugar.Validation do
   end
 
   @doc """
-  converts a variable from a maybe type to a validation type
+  Converts a variable from a maybe type to a validation type.
 
   ## Examples
 
@@ -138,7 +139,7 @@ defmodule Moonsugar.Validation do
   end
 
   @doc """
-  converts a variable from a result type to a validation type
+  Converts a variable from a result type to a validation type.
 
   ## Examples
 

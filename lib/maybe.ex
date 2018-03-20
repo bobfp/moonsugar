@@ -1,11 +1,10 @@
 defmodule Moonsugar.Maybe do
   @moduledoc """
-  The Maybe module contains functions that help create and interact with the maybe type.
-  The Maybe type used in this library is represented as either a Just type or a Nothing type.
+  The Maybe module contains functions that help create and interact with the maybe type. The Maybe type is represented as either `{:just, value}` or `:nothing`.
   """
 
   @doc """
-  Helper function to create a just type
+  Helper function to create a just tuple.
 
   ## Examples
 
@@ -18,7 +17,7 @@ defmodule Moonsugar.Maybe do
   end
 
   @doc """
-  Helper function to create a nothing type
+  Helper function to create a nothing value
 
   ## Examples
 
@@ -31,19 +30,19 @@ defmodule Moonsugar.Maybe do
   end
 
   @doc """
-  Extracts a value from a maybe type
-  If the provided argument doesn't have a value, the default is returned
+  Extracts a value from a maybe type.
+  If the provided argument doesn't have a value, the default is returned.
 
   ## Examples
 
-      iex> Maybe.getWithDefault({:just, 3}, 0)
+      iex> Maybe.get_with_default({:just, 3}, 0)
       3
 
-      iex> Maybe.getWithDefault(:nothing, 0)
+      iex> Maybe.get_with_default(:nothing, 0)
       0
 
   """
-  def getWithDefault(maybe, default) do
+  def get_with_default(maybe, default) do
     case maybe do
       {:just, val} -> val
       _ -> default
@@ -51,7 +50,7 @@ defmodule Moonsugar.Maybe do
   end
 
   @doc """
-  maps over a maybe type
+  Maps over a maybe type.
 
   ## Examples
 
@@ -69,8 +68,8 @@ defmodule Moonsugar.Maybe do
   end
 
   @doc """
-  Like map, but chain takes a function that returns a maybe type
-  This prevents nested maybes
+  Like map, but chain takes a function that returns a maybe type.
+  This prevents nested maybes.
 
   ## Examples
 
@@ -108,7 +107,7 @@ defmodule Moonsugar.Maybe do
   end
 
   @doc """
-  determines if a value is a maybe type
+  Determines if a value is a maybe type.
 
   ## Examples
 
@@ -130,7 +129,7 @@ defmodule Moonsugar.Maybe do
   end
 
   @doc """
-  converts a variable that might be nil to a maybe type
+  Converts a variable that might be nil to a maybe type.
 
   ## Examples
 
@@ -148,7 +147,7 @@ defmodule Moonsugar.Maybe do
   end
 
   @doc """
-  converts a variable from a result type to a maybe type
+  Converts a variable from a result type to a maybe type.
 
   ## Examples
 
@@ -166,7 +165,7 @@ defmodule Moonsugar.Maybe do
   end
 
   @doc """
-  converts a variable from a validation type to a maybe type
+  Converts a variable from a validation type to a maybe type.
 
   ## Examples
 
