@@ -8,8 +8,8 @@ defmodule Moonsugar.Result do
 
   ## Examples
 
-  iex> Result.ok(3)
-  {:ok, 3}
+      iex> Result.ok(3)
+      {:ok, 3}
 
   """
   def ok(val) do
@@ -21,8 +21,8 @@ defmodule Moonsugar.Result do
 
   ## Examples
 
-  iex> Result.error("Goat is floating")
-  {:error, "Goat is floating"}
+      iex> Result.error("Goat is floating")
+      {:error, "Goat is floating"}
 
   """
   def error(reason) do
@@ -35,11 +35,11 @@ defmodule Moonsugar.Result do
 
   ## Examples
 
-  iex> Result.getWithDefault({:ok, 3}, 0)
-  3
+      iex> Result.getWithDefault({:ok, 3}, 0)
+      3
 
-  iex> Result.getWithDefault({:error, "Game Crashed"}, 0)
-  0
+      iex> Result.getWithDefault({:error, "Game Crashed"}, 0)
+      0
 
   """
   def getWithDefault(result, default) do
@@ -54,11 +54,11 @@ defmodule Moonsugar.Result do
 
   ## Examples
 
-  iex> Result.map({:ok, 3}, fn(x) -> x * 2 end)
-  {:ok, 6}
+      iex> Result.map({:ok, 3}, fn(x) -> x * 2 end)
+      {:ok, 6}
 
-  iex> Result.map({:error, "Dwarves"}, fn(x) -> x * 2 end)
-  {:error, "Dwarves"}
+      iex> Result.map({:error, "Dwarves"}, fn(x) -> x * 2 end)
+      {:error, "Dwarves"}
   """
   def map(result, fun) do
     case result do
@@ -73,37 +73,37 @@ defmodule Moonsugar.Result do
 
   ## Examples
 
-  iex> Result.map({:ok, 3}, fn(x) ->
-  ...>   cond do
-  ...>     x > 0 -> {:ok, x * 3}
-  ...>     x <= 0 -> {:error, "number less than 1"}
-  ...>   end
-  ...> end)
-  {:ok, {:ok, 9}}
+      iex> Result.map({:ok, 3}, fn(x) ->
+      ...>   cond do
+      ...>     x > 0 -> {:ok, x * 3}
+      ...>     x <= 0 -> {:error, "number less than 1"}
+      ...>   end
+      ...> end)
+      {:ok, {:ok, 9}}
 
-  iex> Result.chain({:ok, 3}, fn(x) ->
-  ...>   cond do
-  ...>     x > 0 -> {:ok, x * 3}
-  ...>     x <= 0 -> {:error, "number less than 1"}
-  ...>   end
-  ...> end)
-  {:ok, 9}
+      iex> Result.chain({:ok, 3}, fn(x) ->
+      ...>   cond do
+      ...>     x > 0 -> {:ok, x * 3}
+      ...>     x <= 0 -> {:error, "number less than 1"}
+      ...>   end
+      ...> end)
+      {:ok, 9}
 
-  iex> Result.chain({:ok, 0}, fn(x) ->
-  ...>   cond do
-  ...>     x > 0 -> {:ok, x * 3}
-  ...>     x <= 0 -> {:error, "number less than 1"}
-  ...>   end
-  ...> end)
-  {:error, "number less than 1"}
+      iex> Result.chain({:ok, 0}, fn(x) ->
+      ...>   cond do
+      ...>     x > 0 -> {:ok, x * 3}
+      ...>     x <= 0 -> {:error, "number less than 1"}
+      ...>   end
+      ...> end)
+      {:error, "number less than 1"}
 
-  iex> Result.chain({:error, "no number found"}, fn(x) ->
-  ...>   cond do
-  ...>     x > 0 -> {:ok, x * 3}
-  ...>     x <= 0 -> {:error, "number less than 1"}
-  ...>   end
-  ...> end)
-  {:error, "no number found"}
+      iex> Result.chain({:error, "no number found"}, fn(x) ->
+      ...>   cond do
+      ...>     x > 0 -> {:ok, x * 3}
+      ...>     x <= 0 -> {:error, "number less than 1"}
+      ...>   end
+      ...> end)
+      {:error, "no number found"}
   """
   def chain(result, fun) do
     with {:ok, val} <- result,
@@ -126,15 +126,16 @@ defmodule Moonsugar.Result do
   @doc """
   determines if a value is a result type
 
-  ## Examples
-  iex> Result.is_result({:ok, 0})
-  true
+      ## Examples
 
-  iex> Result.is_result({:error, "Not enough ore"})
-  true
+      iex> Result.is_result({:ok, 0})
+      true
 
-  iex> Result.is_result({:just, 3})
-  false
+      iex> Result.is_result({:error, "Not enough ore"})
+      true
+
+      iex> Result.is_result({:just, 3})
+      false
   """
   def is_result(result) do
     case result do
@@ -148,11 +149,12 @@ defmodule Moonsugar.Result do
   converts a variable that might be nil to a result type
 
   ## Examples
-  iex> Result.from_nilable("khajiit has wares", "khajiit does not have wares")
-  {:ok, "khajiit has wares"}
 
-  iex> Result.from_nilable(nil, "khajiit does not have wares")
-  {:error, "khajiit does not have wares"}
+      iex> Result.from_nilable("khajiit has wares", "khajiit does not have wares")
+      {:ok, "khajiit has wares"}
+
+      iex> Result.from_nilable(nil, "khajiit does not have wares")
+      {:error, "khajiit does not have wares"}
   """
   def from_nilable(val, error) do
     cond do
@@ -165,11 +167,12 @@ defmodule Moonsugar.Result do
   converts a variable from a maybe type to a result type
 
   ## Examples
-  iex> Result.from_maybe({:just, 3}, "Not a number")
-  {:ok, 3}
 
-  iex> Result.from_maybe(:nothing, "Not a number")
-  {:error, "Not a number"}
+      iex> Result.from_maybe({:just, 3}, "Not a number")
+      {:ok, 3}
+
+      iex> Result.from_maybe(:nothing, "Not a number")
+      {:error, "Not a number"}
   """
   def from_maybe(result, error) do
     case result do
@@ -182,11 +185,12 @@ defmodule Moonsugar.Result do
   converts a variable from a validation type to a result type
 
   ## Examples
-  iex> Result.from_validation({:success, "Dragon Slayed"})
-  {:ok, "Dragon Slayed"}
 
-  iex> Result.from_validation({:fail, ["You Died", "You ran out of mana"]})
-  {:error, ["You Died", "You ran out of mana"]}
+      iex> Result.from_validation({:success, "Dragon Slayed"})
+      {:ok, "Dragon Slayed"}
+
+      iex> Result.from_validation({:fail, ["You Died", "You ran out of mana"]})
+      {:error, ["You Died", "You ran out of mana"]}
   """
   def from_validation(result) do
     case result do
@@ -199,11 +203,12 @@ defmodule Moonsugar.Result do
   Attempts to do something that might throw an error, and converts the out put to a result type
 
   ## Examples
-  iex> Result.attempt("Shoot Elf")
-  {:ok, "Shoot Elf"}
 
-  iex> Result.attempt(raise("You Died"))
-  {:error, "You Died"}
+      iex> Result.attempt("Shoot Elf")
+      {:ok, "Shoot Elf"}
+
+      iex> Result.attempt(raise("You Died"))
+      {:error, "You Died"}
   """
   defmacro attempt(thing) do
     quote do
