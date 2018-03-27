@@ -1,2 +1,0 @@
-defmodule MoonsugarTest do
-end

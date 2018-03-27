@@ -1,10 +1,13 @@
 defmodule Moonsugar.MixProject do
   use Mix.Project
 
+  @version "0.1.2"
+  @github "https://github.com/bcoop713/moonsugar"
+
   def project do
     [
       app: :moonsugar,
-      version: "0.1.2",
+      version: @version,
       elixir: "~> 1.5",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
@@ -13,9 +16,14 @@ defmodule Moonsugar.MixProject do
         name: "moonsugar",
         licenses: ["MIT"],
         maintainers: ["bcoop713@gmail.com"],
-        links: %{"Github" => "https://github.com/bcoop713/moonsugar"}
+        links: %{"Github" => @github}
+      ],
+      docs: [
+        extras: ["README.md"],
+        main: "readme",
+        source_ref: "#{@version}",
+        source_url: @github
       ]
-
     ]
   end
 
